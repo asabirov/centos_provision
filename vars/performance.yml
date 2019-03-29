@@ -15,7 +15,7 @@ php_tracker_worker_max_requests: 300
 php_tracker_workers_count: "{{ ((php_tracker_memory_mb|float)/php_tracker_worker_size_mb) | round(1, 'ceil') | int }}"
 php_tracker_min_idle_workers_count: "{{ ((php_tracker_workers_count|int) * 0.1) | round(0, 'ceil') | int }}"
 php_tracker_max_idle_workers_count: "{{ ((php_tracker_workers_count|int) * 0.3) | round(0, 'ceil')| int }}"
-php_tracker_start_idle_workers_count: "{{ ((php_tracker_workers_count|int) * 0.2) | round(0, 'ceil') | int }}"
+php_tracker_start_workers_count: "{{ ((php_tracker_workers_count|int) * 0.2) | round(0, 'ceil') | int }}"
 php_tracker_opened_files: "{{ (150 * (php_tracker_workers_count|int)) | round(-3, 'ceil') | int }}"
 
 php_nontracker_memory_factor: "{{ 1 - (php_tracker_memory_factor|float) }}"
@@ -25,6 +25,7 @@ php_nontracker_memory_mb: "{{ (php_memory_mb|float) * (php_nontracker_memory_fac
 php_nontracker_workers_count: "{{((php_nontracker_memory_mb|float)/php_nontracker_worker_size_mb) | round(1, 'ceil') | int}}"
 php_nontracker_min_idle_workers_count: "{{ ((php_nontracker_workers_count|int) * 0.1) | round(0, 'ceil') | int }}"
 php_nontracker_max_idle_workers_count: "{{ ((php_nontracker_workers_count|int) * 0.3) | round(0, 'ceil')| int }}"
+php_nontracker_start_workers_count: "{{ ((php_nontracker_workers_count|int) * 0.2) | round(0, 'ceil') | int }}"
 php_nontracker_opened_files: "{{ (150 * (php_nontracker_workers_count|int)) | round(-3, 'ceil') | int }}"
 
 php_opened_files: "{{ (php_tracker_opened_files|int) + (php_nontracker_opened_files|int) }}"
